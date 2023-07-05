@@ -112,3 +112,5 @@ function adicionarProdutoNaTabela(produto) {
     tabela.appendChild(tr);
 }
 
+
+

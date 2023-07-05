@@ -2,6 +2,7 @@ package sistemadetestesProduto.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
@@ -43,28 +44,30 @@ public class ProdutoTest extends BaseTest {
         assertTrue(texto.contains("1"));
         assertTrue(texto.contains("18,00"));
         assertTrue(texto.contains("2023-07-02"));
-    //  System.out.println(texto);
+        //System.out.println(texto);
     }
 
     @Test
-    public void TC02_naoDeveCadastrarProdutoComValorVazio(){
-        produtoPage.buttonSair.click();
+    public void TC002_naoDeveCadastrarProdutoComCodigoVazio() {
+        //produtoPage.buttonSair.click(
         produtoPage.buttonCriar.click();
-        produtoPage.cadastrar("300", "Detergente", "25", "", "26/12/2023");
+        produtoPage.buttonCriar.click();
+        produtoPage.cadastrar("", "Caixa de leite", "30", "3,00", "23/12/2022");
         assertEquals(produtoPage.mensagem.getText(), "Todos os campos são obrigatórios para o cadastro!");
     }
     
-    
     @Test
-    public void TC03_deveExcluirUmProdutoCriado() {
-        // Executa a ação de exclusão do produto
-        produtoPage.buttonExcluir.click();
-        
-        // Verifica se o produto foi excluído com sucesso
-        boolean produtoExcluido = produtoPage.produtoNaoEstaNaLista("Código do Produto");
-        assertTrue("Produto não foi excluído com sucesso", produtoExcluido);
+    public void TC03_naoDeveCadastrarProdutoComMesmoCodigo() {
+        produtoPage.buttonCriar.click();
+        produtoPage.buttonCriar.click();
+        produtoPage.cadastrar("0205", "Arroz", "1", "18,00", "02/07/2023");
+        String texto = produtoPage.tabela.getText();
+        String mensagem = produtoPage.getMensagemErro();
+        assertEquals("Código já cadastrado", mensagem);
     }
-
+    
+    
+    
 	
 		
 }
