@@ -48,6 +48,11 @@ public class ProdutoPO extends BasePO {
 
     @FindBy(id = "mensagem")
     public WebElement mensagem;
+    
+    @FindBy(xpath = "produto")
+    public WebElement divCadastro;
+
+	public Object btnSalvar;
 
     
     public ProdutoPO(WebDriver driver) {
@@ -80,7 +85,8 @@ public class ProdutoPO extends BasePO {
         buttonSalvar.click();
 	}
 
-
+   
+    
 	
     
     

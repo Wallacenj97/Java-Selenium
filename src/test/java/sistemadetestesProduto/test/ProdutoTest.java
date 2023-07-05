@@ -52,20 +52,19 @@ public class ProdutoTest extends BaseTest {
         //produtoPage.buttonSair.click(
         produtoPage.buttonCriar.click();
         produtoPage.buttonCriar.click();
-        produtoPage.cadastrar("", "Caixa de leite", "30", "3,00", "23/12/2022");
+        produtoPage.cadastrar("", "Caixa de leite", "30", "3,00", "03/07/2023");
         assertEquals(produtoPage.mensagem.getText(), "Todos os campos são obrigatórios para o cadastro!");
     }
     
     @Test
-    public void TC03_naoDeveCadastrarProdutoComMesmoCodigo() {
+    public void TC03_naoDeveCadastrarProdutoComCodigoMaiorQueQuatroCaracteres() {
         produtoPage.buttonCriar.click();
         produtoPage.buttonCriar.click();
-        produtoPage.cadastrar("0205", "Arroz", "1", "18,00", "02/07/2023");
-        String texto = produtoPage.tabela.getText();
+        produtoPage.cadastrar("12345", "Feijão", "2", "5,00", "05/07/2023");
         String mensagem = produtoPage.getMensagemErro();
-        assertEquals("Código já cadastrado", mensagem);
+        assertEquals("O código do produto deve conter no máximo 4 caracteres", mensagem);
+     //   System.out.println(mensagem);
     }
-    
     
     
 	
