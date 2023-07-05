@@ -43,15 +43,28 @@ public class ProdutoTest extends BaseTest {
         assertTrue(texto.contains("1"));
         assertTrue(texto.contains("18,00"));
         assertTrue(texto.contains("2023-07-02"));
-        System.out.println(texto);
+    //  System.out.println(texto);
     }
 
     @Test
-	public void TC002_deveExcluirUmProdutoCriado() {
-		produtoPage.buttonExcluir.click();
-		boolean resultadoDaConferencia = produtoPage.confere(produtoPage.codigo);
-		assertFalse(resultadoDaConferencia);
-	}
-  
-   
+    public void TC02_naoDeveCadastrarProdutoComValorVazio(){
+        produtoPage.buttonSair.click();
+        produtoPage.buttonCriar.click();
+        produtoPage.cadastrar("300", "Detergente", "25", "", "26/12/2023");
+        assertEquals(produtoPage.mensagem.getText(), "Todos os campos são obrigatórios para o cadastro!");
+    }
+    
+    
+    @Test
+    public void TC03_deveExcluirUmProdutoCriado() {
+        // Executa a ação de exclusão do produto
+        produtoPage.buttonExcluir.click();
+        
+        // Verifica se o produto foi excluído com sucesso
+        boolean produtoExcluido = produtoPage.produtoNaoEstaNaLista("Código do Produto");
+        assertTrue("Produto não foi excluído com sucesso", produtoExcluido);
+    }
+
+	
+		
 }

@@ -17,6 +17,9 @@ public class ProdutoPO extends BasePO {
 
     @FindBy(id = "btn-adicionar")
     public WebElement buttonCriar;
+    
+    @FindBy(id = "btn-adicionar")
+    public WebElement buttonExcluir;
 
     @FindBy(id = "codigo")
     public WebElement inputCodigo;
@@ -45,44 +48,25 @@ public class ProdutoPO extends BasePO {
     @FindBy(id = "mensagem")
     public WebElement mensagem;
 
-    /**
-     * Construtor da classe ProdutoPO.
-     *
-     * @param driver O WebDriver usado para interagir com a página.
-     */
+    
     public ProdutoPO(WebDriver driver) {
         super(driver);
     }
-
-    /**
-     * Escreve um texto em um elemento de entrada (input) da página.
-     *
-     * @param input O elemento de entrada onde o texto será escrito.
-     * @param texto O texto a ser escrito no elemento de entrada.
-     */
+    
+    
     public void escrever(WebElement input, String texto) {
         input.clear();
         input.sendKeys(texto + Keys.TAB);
     }
 
-    /**
-     * Realiza um duplo clique no botão de criação de produto.
-     * Isso pode ser usado para abrir um formulário de criação de produto, por exemplo.
-     */
+    
     public void duploClick() {
         buttonCriar.click();
         buttonCriar.click();
     }
-
-    /**
-     * Realiza o cadastro de um produto preenchendo os campos com os valores fornecidos.
-     *
-     * @param codigo     O código do produto.
-     * @param nome       O nome do produto.
-     * @param quantidade A quantidade do produto.
-     * @param valor      O valor do produto.
-     * @param data       A data do produto.
-     */
+    
+  
+    
     public void cadastrar(String codigo, String nome, String quantidade, String valor, String data) {
         escrever(inputCodigo, codigo);
         escrever(inputNome, nome);
@@ -92,9 +76,6 @@ public class ProdutoPO extends BasePO {
         buttonSalvar.click();
         buttonSair.click();
     }
-
-	@FindBy(xpath = "/html/body/div/div[2]/table/tbody/tr/td[6]/button[2]")
-	public WebElement buttonExcluir;
     
     public boolean confere(WebElement valor) {
 		String valorDaLinha = valor.getText();
@@ -105,6 +86,11 @@ public class ProdutoPO extends BasePO {
 			System.out.println("Falha ao excluir.");
 			return false;
 		}
+	}
+
+
+	public boolean produtoNaoEstaNaLista(String string) {
+		return false;
 	}
     
     
